@@ -16,7 +16,7 @@ else
 	PS1='\[\033]0;Bash@$PWD\007\]' # set window title
 	# PS1="$PS1"'\n'                 # new line
 	PS1="$PS1"'\[\033[32m\]'       # change to green
-	PS1="$PS1"'\u@\h:'             # user@host<space>
+	PS1="$PS1"'\u@\h'             # user@host<space>
 	PS1="$PS1"'\[\033[37m\]'       # change to white
 	PS1="$PS1"':'             # user@host<space>
 	# PS1="$PS1"'\[\033[35m\]'       # change to purple
