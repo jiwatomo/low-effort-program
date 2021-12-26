@@ -51,7 +51,7 @@ def main():
 			for j in btn_list_row1:
 				btnframe = tk.Frame(master=center_side, relief=tk.RAISED, borderwidth=1)
 				btnframe.grid(row=i, column=inc)
-				btn_mid = tk.Button(master=btnframe, text=j, command=lambda: mid_button_handler(i, inc))
+				btn_mid = tk.Button(master=btnframe, text=j, command=lambda: mid_button_handler(j))
 				btn_mid.pack()
 				inc += 1
 		elif i == 1:
@@ -59,7 +59,7 @@ def main():
 			for j in btn_list_row2:
 				btnframe = tk.Frame(master=center_side, borderwidth=1)
 				btnframe.grid(row=i, column=inc)
-				btn_mid = tk.Button(master=btnframe, text=j, command=lambda: mid_button_handler(i, inc))
+				btn_mid = tk.Button(master=btnframe, text=j, command=lambda: mid_button_handler(j))
 				btn_mid.pack()
 				inc += 1
 		elif i == 2:
@@ -67,7 +67,7 @@ def main():
 			for j in btn_list_row3:
 				btnframe = tk.Frame(master=center_side, borderwidth=1)
 				btnframe.grid(row=i, column=inc)
-				btn_mid = tk.Button(master=btnframe, text=j, command=lambda: mid_button_handler(i, inc))
+				btn_mid = tk.Button(master=btnframe, text=j, command=lambda: mid_button_handler(j))
 				btn_mid.pack()
 				inc += 1
 				
