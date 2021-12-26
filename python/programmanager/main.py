@@ -1,4 +1,5 @@
 import tkinter as tk
+from functools import partial
 from func import *
 
 # Global Variable
@@ -35,9 +36,6 @@ def main():
 	btn_ExplorerOFF = tk.Button(master=left_side, text="ExplorerOFF")
 	btn_ExplorerOFF.pack(fill=tk.X)
 	
-	tfr1 = tk.Frame(master=mid_area, width=200)
-	tfr1.pack(fill=tk.Y, side=tk.LEFT)
-	
 	# Center
 	center_side = tk.Frame(master=mid_area)
 	center_side.pack(fill=tk.Y, side=tk.LEFT)
@@ -51,7 +49,7 @@ def main():
 			for j in btn_list_row1:
 				btnframe = tk.Frame(master=center_side, relief=tk.RAISED, borderwidth=1)
 				btnframe.grid(row=i, column=inc)
-				btn_mid = tk.Button(master=btnframe, text=j, command=lambda: mid_button_handler(j))
+				btn_mid = tk.Button(master=btnframe, text=j, command=partial(mid_button_handler, j))
 				btn_mid.pack()
 				inc += 1
 		elif i == 1:
@@ -59,7 +57,7 @@ def main():
 			for j in btn_list_row2:
 				btnframe = tk.Frame(master=center_side, borderwidth=1)
 				btnframe.grid(row=i, column=inc)
-				btn_mid = tk.Button(master=btnframe, text=j, command=lambda: mid_button_handler(j))
+				btn_mid = tk.Button(master=btnframe, text=j, command=partial(mid_button_handler, j))
 				btn_mid.pack()
 				inc += 1
 		elif i == 2:
@@ -67,7 +65,7 @@ def main():
 			for j in btn_list_row3:
 				btnframe = tk.Frame(master=center_side, borderwidth=1)
 				btnframe.grid(row=i, column=inc)
-				btn_mid = tk.Button(master=btnframe, text=j, command=lambda: mid_button_handler(j))
+				btn_mid = tk.Button(master=btnframe, text=j, command=partial(mid_button_handler, j))
 				btn_mid.pack()
 				inc += 1
 				
