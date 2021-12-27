@@ -1,11 +1,9 @@
-import tkinter as tk
 from functools import partial
 from func import *
 
 # Global Variable
 app_mode = 0
-
-
+		
 def main():
 	windw = tk.Tk()
 	windw.title("Menu")
@@ -14,10 +12,10 @@ def main():
 	top_area = tk.Frame()
 	top_area.pack()
 	dlabel = tk.Label(master=top_area, text="Welcome!, select the mode first")
-	dlabel.pack(side=tk.LEFT)
+	dlabel.pack(side=tk.LEFT, padx=10)
 	tfr = tk.Frame(master=top_area, width="33")
 	tfr.pack(side=tk.LEFT, fill=tk.X)
-	btn_mode = tk.Button(master=top_area, text="Change mode")
+	btn_mode = tk.Button(master=top_area, text="Change mode", command=lambda: change_modes(dlabel, dlabel_mode))
 	btn_mode.pack(side=tk.RIGHT)
 	
 	
@@ -81,24 +79,36 @@ def main():
 		
 	frame_kosong = tk.Frame(master=mid_area, width=frame_kosong_config["widtha"], height=frame_kosong_config["heighta"])
 	frame_kosong.pack(side=tk.LEFT,fill=tk.X)
-				
+			
 	# Side right
 	left_side = tk.Frame(master=mid_area, borderwidth=3)
 	left_side.pack(fill=tk.Y, side=tk.RIGHT)
 	
-	btn_command = tk.Button(master=left_side, text="cmd")
+	frm_command =tk.Frame(master=left_side)
+	frm_command.pack(fill=tk.X)
+	btn_command = tk.Button(master=frm_command, text="cmd", command=lambda: rightside_changer(btn_command, frm_command))
 	btn_command.pack(fill=tk.X)
-	btn_kill = tk.Button(master=left_side, text="Kill")
+	
+	frm_kill =tk.Frame(master=left_side)
+	frm_kill.pack(fill=tk.X)
+	btn_kill = tk.Button(master=frm_kill, text="Kill", command=lambda: rightside_changer(btn_kill, frm_kill))
 	btn_kill.pack(fill=tk.X)
-	btn_exit = tk.Button(master=left_side, text="Exit")
+	
+	frm_exit =tk.Frame(master=left_side)
+	frm_exit.pack(fill=tk.X)
+	btn_exit = tk.Button(master=frm_exit, text="Exit")
 	btn_exit.pack(fill=tk.X)
+	
 	
 	
 	# Bottom
 	bottom_area = tk.Frame()
 	bottom_area.pack()
-	dlabel_bottom = tk.Label(master=bottom_area, text="Bottom Area")
-	dlabel_bottom.pack()
+	dlabel_mode = tk.Label(master=bottom_area, text="Mode: Not selected")
+	dlabel_mode.pack(side=tk.LEFT, ipadx=1)
+	dlabel_log = tk.Label(master=bottom_area, text="Log started")
+	dlabel_log.pack(side=tk.RIGHT)
+	
 	
 	
 	windw.mainloop()
