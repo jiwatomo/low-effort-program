@@ -1,9 +1,6 @@
 from functools import partial
 from func import *
 
-# Global Variable
-app_mode = 0
-		
 def main():
 	windw = tk.Tk()
 	windw.title("Menu")
@@ -29,7 +26,7 @@ def main():
 	left_side =tk.Frame(master=mid_area, borderwidth=3)
 	left_side.pack(fill=tk.Y, side=tk.LEFT)
 	
-	btn_perform = tk.Button(master=left_side, text="Performance")
+	btn_perform = tk.Button(master=left_side, text="Performance", command=lambda:execs_perform(dlabel_log))
 	btn_perform.pack(fill=tk.X)
 	btn_ExplorerON = tk.Button(master=left_side, text="ExplorerON")
 	btn_ExplorerON.pack(fill=tk.X)
