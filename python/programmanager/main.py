@@ -12,7 +12,7 @@ def main():
 	top_area = tk.Frame()
 	top_area.pack()
 	dlabel = tk.Label(master=top_area, text="Welcome!, select the mode first")
-	dlabel.pack(side=tk.LEFT, padx=10)
+	dlabel.pack(side=tk.LEFT)
 	tfr = tk.Frame(master=top_area, width="33")
 	tfr.pack(side=tk.LEFT, fill=tk.X)
 	btn_mode = tk.Button(master=top_area, text="Change mode", command=lambda: change_modes(dlabel, dlabel_mode))
@@ -96,7 +96,7 @@ def main():
 	
 	frm_exit =tk.Frame(master=left_side)
 	frm_exit.pack(fill=tk.X)
-	btn_exit = tk.Button(master=frm_exit, text="Exit")
+	btn_exit = tk.Button(master=frm_exit, text="Exit", command=lambda: close_button(windw))
 	btn_exit.pack(fill=tk.X)
 	
 	

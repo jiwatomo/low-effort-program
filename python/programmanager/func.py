@@ -1,7 +1,10 @@
 import tkinter as tk
 def update_text(fr, to):
 	print("ok")
-	
+
+def initial():
+	print("ok")
+
 def change_modes(val1, val2):
 	val1["text"] = "Enjoy!"	
 	if val2["text"] == "win10":
@@ -47,3 +50,6 @@ def mid_button_handler(val1):
 		print("Done")
 	elif val1 == "test9":
 		print("Done")
+
+def close_button(windw):
+	windw.destroy()
