@@ -1,5 +1,9 @@
 from functools import partial
 from func import *
+should_init_1 = open("appbanlist.txt", "w")
+should_init_1.close()
+should_init_2 = open("status.txt", "w")
+should_init_2.close()
 
 def main():
 	windw = tk.Tk()
@@ -28,9 +32,9 @@ def main():
 	
 	btn_perform = tk.Button(master=left_side, text="Performance", command=lambda:execs_perform(dlabel_log))
 	btn_perform.pack(fill=tk.X)
-	btn_ExplorerON = tk.Button(master=left_side, text="ExplorerON")
+	btn_ExplorerON = tk.Button(master=left_side, text="ExplorerON", command=lambda:explorer_mode(dlabel_log, btn_ExplorerON))
 	btn_ExplorerON.pack(fill=tk.X)
-	btn_ExplorerOFF = tk.Button(master=left_side, text="ExplorerOFF")
+	btn_ExplorerOFF = tk.Button(master=left_side, text="ExplorerOFF", command=lambda:explorer_mode(dlabel_log, btn_ExplorerOFF))
 	btn_ExplorerOFF.pack(fill=tk.X)
 	
 	frame_kosong_config = {
@@ -45,8 +49,8 @@ def main():
 	center_side = tk.Frame(master=mid_area, borderwidth=3)
 	center_side.pack(fill=tk.Y, side=tk.LEFT)
 	
-	btn_list_row1 = ["test1", "test2", "test3"]
-	btn_list_row2 = ["test4", "test5", "test6"]
+	btn_list_row1 = ["Browser", "Banlist", "ResetApp"]
+	btn_list_row2 = ["Note", "Cpanel", "Sadvanced"]
 	btn_list_row3 = ["test7", "test8", "test9"]
 	for i in range(3):
 		if i == 0:

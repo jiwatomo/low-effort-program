@@ -1,5 +1,7 @@
 import tkinter as tk
+import webbrowser
 from subprocess import Popen
+from tkinter import filedialog
 app_mode = [0]
 
 def update_text(fr, tos):
@@ -41,34 +43,53 @@ def filewirting():
 	for j in handler:
 		ready.append(j.strip())
 	blist.close()
-	if app_mode[0] == 2:
-		hand = open("Scripts\win7perf.bat", "w")
+	if app_mode[0] == 1:
+		hand = open("win7perf.bat", "w")
 		for i in ready:
-			hand.write(f"\ntaskkill /F /IM {i}")
+			hand.write(f"tskill {i}.exe\n")
 		hand.close()
-	elif app_mode[0] == 1:
-		hand = open("Scripts\win10perf.bat", "w")
+		
+	elif app_mode[0] == 2:
+		hand = open("win10perf.bat", "w")
 		for i in ready:
-			hand.write(f"\ntskill {i}")
+			hand.write(f"taskkill /F /IM {i}.exe\n")
 		hand.close()
-	Popen("del \Scripts\*.bat", shell=True)
+		
 
 def execs_perform(log):
-	Popen("cd Scripts", shell=True)
-	Popen("echo %cd%", shell=True)
 	if app_mode[0] == 1:
 		filewirting()
-		Popen("win7perf.bat", shell=True)
+		p = Popen("win7perf.bat")
+		stdout, stderr = p.communicate()
+
 		log["text"] = "Performance Done"
+		Popen("del win7perf.bat", shell=True)
 	elif app_mode[0] == 2:
 		filewirting()
-		Popen("win10perf.bat", shell=True)
+		p = Popen("win10perf.bat")
+		stdout, stderr = p.communicate()
+
 		log["text"] = "Performance Done"
+		Popen("del win10perf.bat", shell=True)
 	else:
 		log["text"] = "select mode first!"
 	
-	Popen("cd ..", shell=True)
-	
+def explorer_mode(log, md):
+
+	if md["text"] == "ExplorerOFF":
+		print("ok")
+		if app_mode[0] == 1:
+			Popen("tskill explorer.exe", shell=True)
+			log["text"] = "Turn off explrer done" 
+		elif app_mode[0] == 2:
+			Popen("taskkill /F /IM explorer.exe", shell=True)
+			log["text"] = "Turn off explrer done" 
+	elif md["text"] == "ExplorerON":
+		Popen("start explorer.exe", shell=True)
+		log["text"] = "Turn on explrer done" 
+
+
+
 def mid_button_handler(val1):
 	if val1 == "test1":
 		print(app_mode)
@@ -83,7 +104,9 @@ def mid_button_handler(val1):
 	elif val1 == "test6":
 		print("Done")
 	elif val1 == "test7":
-		print("Done")
+		status_read = open("status.txt", "x")
+		
+		status_read.close()
 	elif val1 == "test8":
 		print("Done")
 	elif val1 == "test9":
