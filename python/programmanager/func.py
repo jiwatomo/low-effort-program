@@ -1,8 +1,9 @@
+from operator import truediv
 import tkinter as tk
 import webbrowser
 from subprocess import Popen
 from tkinter import filedialog
-app_mode = [0]
+app_mode = [2]
 
 def update_text(fr, tos):
 	fr["text"] = tos
@@ -13,14 +14,6 @@ def update_text(fr, tos):
 #	for i in cmdlist:
 #		Popen(i, shell=True)
 # """
-def change_modes(val1, val2):
-	val1["text"] = "Enjoy!"	
-	if val2["text"] == "win10":
-		app_mode[0] = 1
-		val2["text"] = "win7"
-	else:
-		app_mode[0] = 2
-		val2["text"] = "win10"
 		
 def rightside_changer(val1, val2):
 	btext = val1["text"]
@@ -37,42 +30,27 @@ def rightside_handler(val1, val2, val3, val4):
 	val2.pack(fill=tk.X)
 
 def filewirting():
+	print("Debug: filewriting exe")
+	try:
+		Popen("del win10perf.bat", shell=True)
+	except Exception as e:
+		print(e)
 	ready = []
 	blist = open("appbanlist.txt", "r")
 	handler = blist.readlines()
 	for j in handler:
 		ready.append(j.strip())
 	blist.close()
-	if app_mode[0] == 1:
-		hand = open("win7perf.bat", "w")
-		for i in ready:
-			hand.write(f"tskill {i}.exe\n")
-		hand.close()
-		
-	elif app_mode[0] == 2:
-		hand = open("win10perf.bat", "w")
-		for i in ready:
-			hand.write(f"taskkill /F /IM {i}.exe\n")
-		hand.close()
+	
+	hand = open("win10perf.bat", "wt")
+	for i in ready:
+		hand.write(f"taskkill /F /IM {i}.exe\n")
+	hand.close()
 		
 
 def execs_perform(log):
-	if app_mode[0] == 1:
-		filewirting()
-		p = Popen("win7perf.bat")
-		stdout, stderr = p.communicate()
-
-		log["text"] = "Performance Done"
-		Popen("del win7perf.bat", shell=True)
-	elif app_mode[0] == 2:
-		filewirting()
-		p = Popen("win10perf.bat")
-		stdout, stderr = p.communicate()
-
-		log["text"] = "Performance Done"
-		Popen("del win10perf.bat", shell=True)
-	else:
-		log["text"] = "select mode first!"
+	p = Popen("start win10perf.bat", shell=True)
+	log["text"] = "Performance Done"
 	
 def explorer_mode(log, md):
 
@@ -91,10 +69,13 @@ def explorer_mode(log, md):
 
 
 def mid_button_handler(val1):
-	if val1 == "test1":
-		print(app_mode)
-	elif val1 == "test2":
-		Popen("echo %cd%", shell=True)
+	if val1 == "Browser":
+		Popen("explorer https://google.com", shell=True)
+	elif val1 == "Banlist":
+		print("Don't forget to saving before closing!")
+		notepad_open = Popen("start /wait notepad appbanlist.txt", shell=True)
+		notepad_open.wait()
+		filewirting()
 	elif val1 == "test3":
 		print("Done")
 	elif val1 == "test4":

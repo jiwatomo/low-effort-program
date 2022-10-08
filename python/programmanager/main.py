@@ -1,23 +1,23 @@
 from functools import partial
 from func import *
-should_init_1 = open("appbanlist.txt", "w")
-should_init_1.close()
 should_init_2 = open("status.txt", "w")
 should_init_2.close()
+filewirting()
 
 def main():
 	windw = tk.Tk()
-	windw.title("Menu")
-	
+	windw.title("Program Manager")
 	# Top
 	top_area = tk.Frame()
 	top_area.pack()
-	dlabel = tk.Label(master=top_area, text="Welcome!, select the mode first")
+	dlabel = tk.Label(master=top_area, text="Welcome!")
 	dlabel.pack(side=tk.LEFT)
-	tfr = tk.Frame(master=top_area, width="33")
-	tfr.pack(side=tk.LEFT, fill=tk.X)
-	btn_mode = tk.Button(master=top_area, text="Change mode", command=lambda: change_modes(dlabel, dlabel_mode))
-	btn_mode.pack(side=tk.RIGHT)
+	frame_kosong = tk.Frame(master=top_area, width=270, height=1)
+	frame_kosong.pack()
+	dlabel_mode = tk.Label(master=top_area, text="Made By Jtm")
+	dlabel_mode.pack(side=tk.RIGHT)
+
+
 	
 	
 	# Mid
@@ -38,7 +38,7 @@ def main():
 	btn_ExplorerOFF.pack(fill=tk.X)
 	
 	frame_kosong_config = {
-		"widtha": 20,
+		"widtha": 15,
 		"heighta": 1
 	}
 	
@@ -49,13 +49,14 @@ def main():
 	center_side = tk.Frame(master=mid_area, borderwidth=3)
 	center_side.pack(fill=tk.Y, side=tk.LEFT)
 	
-	btn_list_row1 = ["Browser", "Banlist", "ResetApp"]
+	btn_list_row1 = ["Browser", "Banlist", "AppCheck"]
 	btn_list_row2 = ["Note", "Cpanel", "Sadvanced"]
 	btn_list_row3 = ["test7", "test8", "test9"]
+	
 	for i in range(3):
+		btnframe = tk.Frame(master=center_side, relief=tk.RAISED, borderwidth=1)
 		if i == 0:
 			inc = 0
-			btnframe = tk.Frame(master=center_side, relief=tk.RAISED, borderwidth=1)
 			btnframe.grid(row=i, column=inc)
 			for j in btn_list_row1:
 				btn_mid = tk.Button(master=btnframe, text=j, command=partial(mid_button_handler, j))
@@ -63,7 +64,6 @@ def main():
 				inc += 1
 		elif i == 1:
 			inc = 0
-			btnframe = tk.Frame(master=center_side, borderwidth=1)
 			btnframe.grid(row=i, column=inc)
 			for j in btn_list_row2:
 				btn_mid = tk.Button(master=btnframe, text=j, command=partial(mid_button_handler, j))
@@ -71,7 +71,6 @@ def main():
 				inc += 1
 		elif i == 2:
 			inc = 0
-			btnframe = tk.Frame(master=center_side, borderwidth=1)
 			btnframe.grid(row=i, column=inc)
 			for j in btn_list_row3:
 				btn_mid = tk.Button(master=btnframe, text=j, command=partial(mid_button_handler, j))
@@ -105,10 +104,8 @@ def main():
 	# Bottom
 	bottom_area = tk.Frame()
 	bottom_area.pack()
-	dlabel_mode = tk.Label(master=bottom_area, text="Mode: Not selected")
-	dlabel_mode.pack(side=tk.LEFT, ipadx=1)
 	dlabel_log = tk.Label(master=bottom_area, text="Log started")
-	dlabel_log.pack(side=tk.RIGHT)
+	dlabel_log.pack()
 	
 	
 	
