@@ -55,47 +55,47 @@ def main():
 	for i in range(3):
 		if i == 0:
 			inc = 0
+			btnframe = tk.Frame(master=center_side, relief=tk.RAISED, borderwidth=1)
+			btnframe.grid(row=i, column=inc)
 			for j in btn_list_row1:
-				btnframe = tk.Frame(master=center_side, relief=tk.RAISED, borderwidth=1)
-				btnframe.grid(row=i, column=inc)
 				btn_mid = tk.Button(master=btnframe, text=j, command=partial(mid_button_handler, j))
-				btn_mid.pack()
+				btn_mid.pack(fill=tk.X,side=tk.LEFT)
 				inc += 1
 		elif i == 1:
 			inc = 0
+			btnframe = tk.Frame(master=center_side, borderwidth=1)
+			btnframe.grid(row=i, column=inc)
 			for j in btn_list_row2:
-				btnframe = tk.Frame(master=center_side, borderwidth=1)
-				btnframe.grid(row=i, column=inc)
 				btn_mid = tk.Button(master=btnframe, text=j, command=partial(mid_button_handler, j))
-				btn_mid.pack()
+				btn_mid.pack(fill=tk.X,side=tk.LEFT)
 				inc += 1
 		elif i == 2:
 			inc = 0
+			btnframe = tk.Frame(master=center_side, borderwidth=1)
+			btnframe.grid(row=i, column=inc)
 			for j in btn_list_row3:
-				btnframe = tk.Frame(master=center_side, borderwidth=1)
-				btnframe.grid(row=i, column=inc)
 				btn_mid = tk.Button(master=btnframe, text=j, command=partial(mid_button_handler, j))
-				btn_mid.pack()
+				btn_mid.pack(fill=tk.X,side=tk.LEFT)
 				inc += 1
 		
 	frame_kosong = tk.Frame(master=mid_area, width=frame_kosong_config["widtha"], height=frame_kosong_config["heighta"])
 	frame_kosong.pack(side=tk.LEFT,fill=tk.X)
 			
 	# Side right
-	left_side = tk.Frame(master=mid_area, borderwidth=3)
-	left_side.pack(fill=tk.Y, side=tk.RIGHT)
+	rigth_side = tk.Frame(master=mid_area, borderwidth=3)
+	rigth_side.pack(fill=tk.Y, side=tk.RIGHT)
 	
-	frm_command =tk.Frame(master=left_side)
+	frm_command =tk.Frame(master=rigth_side)
 	frm_command.pack(fill=tk.X)
 	btn_command = tk.Button(master=frm_command, text="cmd", command=lambda: rightside_changer(btn_command, frm_command))
 	btn_command.pack(fill=tk.X)
 	
-	frm_kill =tk.Frame(master=left_side)
+	frm_kill =tk.Frame(master=rigth_side)
 	frm_kill.pack(fill=tk.X)
 	btn_kill = tk.Button(master=frm_kill, text="Kill", command=lambda: rightside_changer(btn_kill, frm_kill))
 	btn_kill.pack(fill=tk.X)
 	
-	frm_exit =tk.Frame(master=left_side)
+	frm_exit =tk.Frame(master=rigth_side)
 	frm_exit.pack(fill=tk.X)
 	btn_exit = tk.Button(master=frm_exit, text="Exit", command=lambda: close_button(windw))
 	btn_exit.pack(fill=tk.X)
