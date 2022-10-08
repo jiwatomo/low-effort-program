@@ -30,7 +30,7 @@ def rightside_handler(val1, val2, val3, val4):
 	val2.pack(fill=tk.X)
 
 def filewirting():
-	print("Debug: filewriting exe")
+	
 	try:
 		Popen("del win10perf.bat", shell=True)
 	except Exception as e:
@@ -41,11 +41,15 @@ def filewirting():
 	for j in handler:
 		ready.append(j.strip())
 	blist.close()
-	
-	hand = open("win10perf.bat", "wt")
+
+	hand = open("win10perf.txt", "wt")
+	hand.write(f"@echo off\n")
 	for i in ready:
 		hand.write(f"taskkill /F /IM {i}.exe\n")
+	hand.write(f"exit\n")
 	hand.close()
+	Popen("move win10perf.txt win10perf.bat", shell=True)
+	print("Debug: filewriting exe")
 		
 
 def execs_perform(log):

@@ -1,6 +1,7 @@
 *.exe
 *.dll
 *.pyc
+*.bat
 __pycache__/
 programmanagervenv/
 dist/
