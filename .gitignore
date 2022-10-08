@@ -1,7 +1,7 @@
 *.exe
 *.dll
 *.pyc
-*.bat
+win10perf.bat
 __pycache__/
 programmanagervenv/
 dist/
