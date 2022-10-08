@@ -1,0 +1,8 @@
+g++ -std=c++17 -Wshadow -Wall -o "%e" "%f" -O2 -Wno-unused-result
+g++ -std=c++17 -Wshadow -Wall -o "%e" "%f" -g -D_GLIBCXX_DEBUG
+"./%e"
+
+
+g++ -std=c++17 -Wshadow -Wall -o $(NAME_PART) $(FILE_NAME) -O2 -Wno-unused-result
+g++ -std=c++17 -Wshadow -Wall -o $(NAME_PART) $(FILE_NAME) -g -D_GLIBCXX_DEBUG
+"./$(NAME_PART)"
