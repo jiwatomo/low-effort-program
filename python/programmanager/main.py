@@ -4,9 +4,11 @@ should_init_2 = open("status.txt", "w")
 should_init_2.close()
 filewirting()
 
+
 def main():
 	windw = tk.Tk()
 	windw.title("Program Manager")
+	windw.iconbitmap("favicon.ico")
 	# Top
 	top_area = tk.Frame()
 	top_area.pack()
@@ -44,42 +46,45 @@ def main():
 	
 	frame_kosong = tk.Frame(master=mid_area, width=frame_kosong_config["widtha"], height=frame_kosong_config["heighta"])
 	frame_kosong.pack(side=tk.LEFT,fill=tk.X)
-	
+	bottom_area = tk.Frame()
+	dlabel_log = tk.Label(master=bottom_area, text="Log started")
 	# Center
 	center_side = tk.Frame(master=mid_area, borderwidth=3)
 	center_side.pack(fill=tk.Y, side=tk.LEFT)
 	
 	btn_list_row1 = ["Browser", "Banlist", "AppCheck"]
 	btn_list_row2 = ["Note", "Cpanel", "Sadvanced"]
-	btn_list_row3 = ["test7", "test8", "test9"]
-	
+	btn_list_row3 = ["Dmanager", "test8", "test9"]
 	for i in range(3):
 		btnframe = tk.Frame(master=center_side, relief=tk.RAISED, borderwidth=1)
 		if i == 0:
 			inc = 0
 			btnframe.grid(row=i, column=inc)
 			for j in btn_list_row1:
-				btn_mid = tk.Button(master=btnframe, text=j, command=partial(mid_button_handler, j))
+				btn_mid = tk.Button(master=btnframe, text=j, command=partial(mid_button_handler, j, dlabel_log))
 				btn_mid.pack(fill=tk.X,side=tk.LEFT)
 				inc += 1
 		elif i == 1:
 			inc = 0
 			btnframe.grid(row=i, column=inc)
 			for j in btn_list_row2:
-				btn_mid = tk.Button(master=btnframe, text=j, command=partial(mid_button_handler, j))
+				btn_mid = tk.Button(master=btnframe, text=j, command=partial(mid_button_handler, j, dlabel_log))
 				btn_mid.pack(fill=tk.X,side=tk.LEFT)
 				inc += 1
 		elif i == 2:
 			inc = 0
 			btnframe.grid(row=i, column=inc)
 			for j in btn_list_row3:
-				btn_mid = tk.Button(master=btnframe, text=j, command=partial(mid_button_handler, j))
+				btn_mid = tk.Button(master=btnframe, text=j, command=partial(mid_button_handler, j, dlabel_log))
 				btn_mid.pack(fill=tk.X,side=tk.LEFT)
 				inc += 1
 		
 	frame_kosong = tk.Frame(master=mid_area, width=frame_kosong_config["widtha"], height=frame_kosong_config["heighta"])
 	frame_kosong.pack(side=tk.LEFT,fill=tk.X)
-			
+	
+	
+
+
 	# Side right
 	rigth_side = tk.Frame(master=mid_area, borderwidth=3)
 	rigth_side.pack(fill=tk.Y, side=tk.RIGHT)
@@ -102,12 +107,8 @@ def main():
 	
 	
 	# Bottom
-	bottom_area = tk.Frame()
 	bottom_area.pack()
-	dlabel_log = tk.Label(master=bottom_area, text="Log started")
 	dlabel_log.pack()
-	
-	
 	
 	windw.mainloop()
 	

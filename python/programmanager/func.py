@@ -1,8 +1,7 @@
-from operator import truediv
 import tkinter as tk
-import webbrowser
 from subprocess import Popen
 from tkinter import filedialog
+import wmi
 app_mode = [2]
 
 def update_text(fr, tos):
@@ -30,7 +29,6 @@ def rightside_handler(val1, val2, val3, val4):
 	val2.pack(fill=tk.X)
 
 def filewirting():
-	print("Debug: filewriting exe")
 	try:
 		Popen("del win10perf.bat", shell=True)
 	except Exception as e:
@@ -42,9 +40,12 @@ def filewirting():
 		ready.append(j.strip())
 	blist.close()
 	
-	hand = open("win10perf.bat", "wt")
+	hand = open("win10perf.txt", "wt")
+	hand.write(f"@echo off\n")
 	for i in ready:
-		hand.write(f"taskkill /F /IM {i}.exe\n")
+		hand.write(f"taskkill /F /IM {i}.exe >NUL\n")
+	hand.write(f"exit\n")
+	Popen("move win10perf.txt win10perf.bat >NUL", shell=True)
 	hand.close()
 		
 
@@ -68,18 +69,26 @@ def explorer_mode(log, md):
 
 
 
-def mid_button_handler(val1):
+def mid_button_handler(val1, log):
 	if val1 == "Browser":
-		Popen("explorer https://google.com", shell=True)
+		csm = Popen("explorer https://google.com", shell=True)
+		csm.wait()
+		log['text'] = "Browser opened"
 	elif val1 == "Banlist":
 		print("Don't forget to saving before closing!")
-		notepad_open = Popen("start /wait notepad appbanlist.txt", shell=True)
+		notepad_open = Popen("notepad appbanlist.txt", shell=True)
 		notepad_open.wait()
 		filewirting()
-	elif val1 == "test3":
+	elif val1 == "AppCheck":
+		tasks_reading = wmi.WMI()
+		tasks_handler = []
+		print("Cotto Matte")
+		for process in tasks_reading.Win32_Process():
+			tasks_handler.append(f"{process.Name}")
+		print(tasks_handler[0])
+	elif val1 == "Cpanel":
 		print("Done")
-	elif val1 == "test4":
-		print("Done")
+		log["text"] =" HEllo"
 	elif val1 == "test5":
 		print("Done")
 	elif val1 == "test6":
