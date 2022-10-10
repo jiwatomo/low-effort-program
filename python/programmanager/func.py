@@ -2,6 +2,7 @@ import tkinter as tk
 from subprocess import Popen
 from tkinter import filedialog
 import wmi
+import json
 app_mode = [2]
 
 def update_text(fr, tos):
@@ -29,10 +30,6 @@ def rightside_handler(val1, val2, val3, val4):
 	val2.pack(fill=tk.X)
 
 def filewirting():
-<<<<<<< HEAD
-	
-=======
->>>>>>> wtfthis
 	try:
 		Popen("del win10perf.bat", shell=True)
 	except Exception as e:
@@ -43,14 +40,6 @@ def filewirting():
 	for j in handler:
 		ready.append(j.strip())
 	blist.close()
-<<<<<<< HEAD
-
-	hand = open("win10perf.txt", "wt")
-	hand.write(f"@echo off\n")
-	for i in ready:
-		hand.write(f"taskkill /F /IM {i}.exe\n")
-	hand.write(f"exit\n")
-=======
 	
 	hand = open("win10perf.txt", "wt")
 	hand.write(f"@echo off\n")
@@ -58,7 +47,6 @@ def filewirting():
 		hand.write(f"taskkill /F /IM {i}.exe >NUL\n")
 	hand.write(f"exit\n")
 	Popen("move win10perf.txt win10perf.bat >NUL", shell=True)
->>>>>>> wtfthis
 	hand.close()
 	Popen("move win10perf.txt win10perf.bat", shell=True)
 	print("Debug: filewriting exe")
@@ -84,7 +72,7 @@ def explorer_mode(log, md):
 
 
 
-def mid_button_handler(val1, log):
+def mid_button_handler(val1, log, windw):
 	if val1 == "Browser":
 		csm = Popen("explorer https://google.com", shell=True)
 		csm.wait()
@@ -97,10 +85,97 @@ def mid_button_handler(val1, log):
 	elif val1 == "AppCheck":
 		tasks_reading = wmi.WMI()
 		tasks_handler = []
+		jsmv = Popen("move banlist.txt banlist.json", shell=True)
+		jsmv.wait()
+		the_json = open('banlist.json')
+		banlist = json.load(the_json)
+		banlist["banlist"].sort()
 		print("Cotto Matte")
-		for process in tasks_reading.Win32_Process():
-			tasks_handler.append(f"{process.Name}")
-		print(tasks_handler[0])
+		def refreshProcess():
+			for process in tasks_reading.Win32_Process():
+					tasks_handler.append(f"{process.Name}")
+			tasks_handler.sort()
+			
+		appcheckwindw = tk.Toplevel(windw)                         #APPCHECK WINDOW!
+		frame_atas =tk.Frame(master=appcheckwindw)
+		frame_appcheck_left = tk.Frame(master=frame_atas)
+		text_before = tk.Label(master=frame_appcheck_left, text="All Opened App")
+		text_before.pack()
+
+		listbox_before = tk.Listbox(master=frame_appcheck_left)
+		
+		
+		def refreshData():
+			listbox_before.delete(0, listbox_before.size())
+			listbox_after.delete(0, listbox_after.size())
+			incvar = 0
+			for j in tasks_handler:
+				checker = j in banlist["banlist"]
+				if checker == True:
+					continue
+				listbox_before.insert(incvar, j)
+				incvar += 1
+			incvarafter = 1
+			for after in banlist["banlist"]:
+				listbox_after.insert(incvar, after)
+				incvarafter += 1
+			print(incvar)
+		
+		listbox_before.pack(fill=tk.BOTH, expand=True)
+
+		frame_appcheck_right = tk.Frame(master=frame_atas)
+		text_after = tk.Label(master=frame_appcheck_right, text="To be killed")
+		listbox_after = tk.Listbox(master=frame_appcheck_right)
+	
+
+		def getSelected():
+			selected = listbox_before.curselection()
+			selectedContent = listbox_before.get(selected[0])
+			banlist["banlist"].append(selectedContent)
+			refreshData()
+			listbox_before.delete(selected[0])
+
+		def removeSelected():
+			selected = listbox_after.curselection()
+			selectedContent = listbox_after.get(selected[0])
+			banlist["banlist"].remove(selectedContent)
+			refreshData()
+			listbox_after.delete(selected[0])
+		
+		def onSaving():
+			the_json.close()
+			Popen("del banlist.json", shell=True)
+			with open("banlist.txt", "a") as outfile:
+				json.dump(banlist, outfile)
+			jsmv = Popen("move banlist.txt banlist.json", shell=True)
+			jsmv.wait()
+			appcheckwindw.destroy()
+			
+
+		frame_appcheck_mid = tk.Frame(master=frame_atas)
+		btn_adding = tk.Button(master=frame_appcheck_mid, text=">>>", command=getSelected)
+		btn_removing = tk.Button(master=frame_appcheck_mid, text="<<<", command=removeSelected)
+		btn_adding.pack(fill=tk.X, expand=True)
+		btn_removing.pack(fill=tk.X, expand=True)
+
+
+		
+		text_after.pack()
+		listbox_after.pack(fill=tk.BOTH, expand=True)
+
+		frame_appcheck_bottom = tk.Frame(master=appcheckwindw)
+		btn_comfir = tk.Button(master=frame_appcheck_bottom, text="Save", command=onSaving)
+		btn_comfir.pack(side=tk.RIGHT, padx=10, ipadx=10)
+		btn_refres = tk.Button(master=frame_appcheck_bottom, text="Refresh", command=refreshProcess)
+		btn_refres.pack(side=tk.RIGHT, padx=10, ipadx=10)
+		frame_atas.pack(fill=tk.BOTH, expand=True)
+		frame_appcheck_left.pack(side=tk.LEFT,fill=tk.BOTH, expand=True)
+		frame_appcheck_mid.pack(side=tk.LEFT,fill=tk.BOTH, expand=True)
+		frame_appcheck_right.pack(side=tk.RIGHT,fill=tk.BOTH, expand=True)
+		frame_appcheck_bottom.pack(fill=tk.BOTH, ipadx=5, ipady=5, expand=True)
+		refreshProcess()
+		refreshData()
+		appcheckwindw.mainloop()
 	elif val1 == "Cpanel":
 		print("Done")
 		log["text"] =" HEllo"

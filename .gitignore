@@ -1,7 +1,9 @@
 *.exe
 *.dll
 *.pyc
+.vscode
 win10perf.bat
+banlist.json
 __pycache__/
 programmanagervenv/
 dist/

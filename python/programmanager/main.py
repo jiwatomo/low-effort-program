@@ -1,7 +1,7 @@
 from functools import partial
 from func import *
-should_init_2 = open("status.txt", "w")
-should_init_2.close()
+# should_init_2 = open("banlist.json", "a")
+# should_init_2.close()
 filewirting()
 
 
@@ -61,21 +61,21 @@ def main():
 			inc = 0
 			btnframe.grid(row=i, column=inc)
 			for j in btn_list_row1:
-				btn_mid = tk.Button(master=btnframe, text=j, command=partial(mid_button_handler, j, dlabel_log))
+				btn_mid = tk.Button(master=btnframe, text=j, command=partial(mid_button_handler, j, dlabel_log, windw))
 				btn_mid.pack(fill=tk.X,side=tk.LEFT)
 				inc += 1
 		elif i == 1:
 			inc = 0
 			btnframe.grid(row=i, column=inc)
 			for j in btn_list_row2:
-				btn_mid = tk.Button(master=btnframe, text=j, command=partial(mid_button_handler, j, dlabel_log))
+				btn_mid = tk.Button(master=btnframe, text=j, command=partial(mid_button_handler, j, dlabel_log, windw))
 				btn_mid.pack(fill=tk.X,side=tk.LEFT)
 				inc += 1
 		elif i == 2:
 			inc = 0
 			btnframe.grid(row=i, column=inc)
 			for j in btn_list_row3:
-				btn_mid = tk.Button(master=btnframe, text=j, command=partial(mid_button_handler, j, dlabel_log))
+				btn_mid = tk.Button(master=btnframe, text=j, command=partial(mid_button_handler, j, dlabel_log, windw))
 				btn_mid.pack(fill=tk.X,side=tk.LEFT)
 				inc += 1
 		
